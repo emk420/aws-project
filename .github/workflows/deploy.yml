@@ -3,7 +3,7 @@
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: my-flask-app
       run: |
-        # Build and tag with both the unique commit SHA and 'latest'
+
         docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }} -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:${{ github.sha }}
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
