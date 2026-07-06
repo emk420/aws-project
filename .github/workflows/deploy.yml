@@ -1,3 +1,14 @@
+name: Deploy to Amazon ECR via OIDC
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: read
+
 jobs:
   deploy:
     name: Build and Push to ECR
@@ -10,7 +21,7 @@ jobs:
     - name: Configure AWS Credentials via OIDC
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::825386256446:role/github-actions-ecr-role # Make sure this matches your exact role name
+        role-to-assume: arn:aws:iam::825386256446:role/github-actions-ecr-role
         aws-region: us-east-2
         audience: sts.amazonaws.com
 
